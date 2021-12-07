@@ -4,7 +4,7 @@
 
 """
  @file PotentialMap.py
- @brief ModuleDescription
+ @brief Elliptical_potential_method
  @date $Date$
 
 
@@ -38,7 +38,7 @@ import OpenRTM_aist
 # <rtc-template block="module_spec">
 potentialmap_spec = ["implementation_id", "PotentialMap", 
 		 "type_name",         "PotentialMap", 
-		 "description",       "ModuleDescription", 
+		 "description",       "Elliptical_potential_method", 
 		 "version",           "1.0.0", 
 		 "vendor",            "TomokiTanikawa", 
 		 "category",          "Navigation", 
@@ -48,19 +48,22 @@ potentialmap_spec = ["implementation_id", "PotentialMap",
 		 "lang_type",         "SCRIPT",
 		 "conf.default.Goal_Place_x", "0.0",
 		 "conf.default.Goal_Place_y", "0.0",
+		 "conf.default.Map_making", "False",
 
 		 "conf.__widget__.Goal_Place_x", "text",
 		 "conf.__widget__.Goal_Place_y", "text",
+		 "conf.__widget__.Map_making", "text",
 
          "conf.__type__.Goal_Place_x", "float",
          "conf.__type__.Goal_Place_y", "float",
+         "conf.__type__.Map_making", "string",
 
 		 ""]
 # </rtc-template>
 
 ##
 # @class PotentialMap
-# @brief ModuleDescription
+# @brief Elliptical_potential_method
 # 
 # 
 class PotentialMap(OpenRTM_aist.DataFlowComponentBase):
@@ -126,6 +129,12 @@ class PotentialMap(OpenRTM_aist.DataFlowComponentBase):
 		 - DefaultValue: 0.0
 		"""
 		self._Goal_Place_y = [0.0]
+		"""
+		
+		 - Name:  Map_making
+		 - DefaultValue: False
+		"""
+		self._Map_making = ['False']
 		
 		# </rtc-template>
 
@@ -143,6 +152,7 @@ class PotentialMap(OpenRTM_aist.DataFlowComponentBase):
 		# Bind variables and configuration variable
 		self.bindParameter("Goal_Place_x", self._Goal_Place_x, "0.0")
 		self.bindParameter("Goal_Place_y", self._Goal_Place_y, "0.0")
+		self.bindParameter("Map_making", self._Map_making, "False")
 		
 		# Set InPort buffers
 		self.addInPort("Robot_Data",self._Robot_DataIn)
@@ -227,7 +237,10 @@ class PotentialMap(OpenRTM_aist.DataFlowComponentBase):
 		self.Goal_flag = False
 		self.object_flag = False
 		self.human_flag = False
-		self.memory_flag = False
+		if self._Map_making[0] == 'False':
+			self.memory_flag = False
+		else:
+			self.memory_flag = True
 		self.Previous_human_Data = [0.0,0.0]
 		self.area_pot = [[]]
 		print("check2")
@@ -249,7 +262,7 @@ class PotentialMap(OpenRTM_aist.DataFlowComponentBase):
 		#
 		#
 	def onDeactivated(self, ec_id):
-		
+	
 		return RTC.RTC_OK
 	
 		##
@@ -379,11 +392,11 @@ class PotentialMap(OpenRTM_aist.DataFlowComponentBase):
 								j = jIn + (self.pre_y * 10) * etm_y
 								obst_target_position, obst_Object = self.Potential.target_check(i,j,'obstacle')
 								goal_target_position, goal_Object = self.Potential.target_check(i,j,'goal')
-								self.area_pot[100 + j][100 + i] += self.Potential.Pot([i,j],obst_target_position,goal_target_position,'obst','goal')
+								self.area_pot[100 + jIn][100 + iIn] += self.Potential.Pot([i,j],obst_target_position,goal_target_position,'obst','goal')
 				
 								self._d_Map_Data.data.x = i / 10
 								self._d_Map_Data.data.y = j / 10
-								self._d_Map_Data.data.z = self.area_pot[100 + j][100 + i]
+								self._d_Map_Data.data.z = self.area_pot[100 + jIn][100 + iIn]
 
 								##マップ生成(forループ内に入れる)
 								OpenRTM_aist.setTimestamp(self._d_Map_Data)

@@ -108,7 +108,6 @@ Parameter        Data type          Default Value    Effect
 ================ ================== ================ ======
 Goal_Place_x     float              0.0              
 Goal_Place_y     float              0.0              
-Map_making       string             False            
 ================ ================== ================ ======
 
 Ports

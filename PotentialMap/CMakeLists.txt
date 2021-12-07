@@ -16,7 +16,7 @@ set(RTC_VERSION_MAJOR "1")
 set(RTC_VERSION_MINOR "0")
 set(RTC_VERSION_PATCH "0")
 set(RTC_LANG "python")
-set(RTC_DESCRIPTION "ModuleDescription")
+set(RTC_DESCRIPTION "Elliptical_potential_method")
 set(RTC_VENDOR "TomokiTanikawa")
 set(RTC_MAINTAINER "author@example.com")
 

@@ -100,7 +100,6 @@ PotentialMapは ``PotentialMapComp`` を実行（ ``${prefix}/components/bin`` �
 ================ ================== ================ ====
 Goal_Place_x     float              0.0              
 Goal_Place_y     float              0.0              
-Map_making       string             False            
 ================ ================== ================ ====
 
 ポート

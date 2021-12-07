@@ -195,13 +195,12 @@ class PotentialMod:
 		#現在地との距離を計算して最も近いものを返す
 		#閾値以上だったらNone
 		for position_type, position_list in target_list.items():
-			
 			for position in position_list:
 				if(position[0]==None or position[1]==None):
 					pass
 				else:
 					print(position)
-					dist      = math.sqrt((float(x) - position[0])**2 + (float(y) - position[1])**2 )
+					dist      = math.sqrt((x - position[0])**2 + (y - position[1])**2 )
 					if tmp_dist>dist:
 						if type=='obstacle':
 							tmp_dist = dist

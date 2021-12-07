@@ -6,7 +6,7 @@
 
   <xsl:template match="/wix:Wix">
     <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-      <Product xmlns="http://schemas.microsoft.com/wix/2006/wi" Id="E4904D48-E496-4750-9E38-14B0292CA071" Name="@RTC_NAME@ @PACKAGE_VERSION@" Language="1041" Codepage="932" Version="@PACKAGE_VERSION@" Manufacturer="@RTC_VENDOR@" UpgradeCode="05947705-632F-4832-BBFE-BA67EDFFD1B2">
+      <Product xmlns="http://schemas.microsoft.com/wix/2006/wi" Id="B1C60BDA-B3D0-4FF0-AFEC-812EE53C6104" Name="@RTC_NAME@ @PACKAGE_VERSION@" Language="1041" Codepage="932" Version="@PACKAGE_VERSION@" Manufacturer="@RTC_VENDOR@" UpgradeCode="CE76C89C-A7F8-4375-811A-54F7915B51CF">
         <Package InstallerVersion="300" Compressed="yes" Languages='1041' SummaryCodepage='932' />
         <Media Id="1" Cabinet="@RTC_NAME@.cab" EmbedCab="yes" />
         <Directory Id="TARGETDIR" Name="SourceDir" >
